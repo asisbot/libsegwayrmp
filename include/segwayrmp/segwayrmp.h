@@ -141,7 +141,11 @@ typedef enum {
   /*!
    * This is the new rmp400, dubbed the rmpx440, which allows ethernet control.
    */
-  rmpx440  = 4
+  rmpx440  = 4,
+  /*!
+   * This indicates you have an RMP50XL vehicle.
+   */
+  rmp50XL   = 5
 } SegwayRMPType;
 
 /*!

@@ -166,6 +166,11 @@
           <string>RMP 400</string>
          </property>
         </item>
+        <item>
+         <property name="text">
+          <string>RMP 50XL</string>
+         </property>
+        </item>
        </widget>
       </item>
       <item>
