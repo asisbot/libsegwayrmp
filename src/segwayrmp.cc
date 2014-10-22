@@ -887,7 +887,7 @@ bool SegwayRMP::ParsePacket_(Packet &packet, SegwayStatus::Ptr &ss_ptr)
       getInt(packet.data[4], packet.data[5], packet.data[6], packet.data[7])
     / this->rev_to_counts_;
     // convert from revolutions to degrees
-    if(rmp_type != rmp50XL) ss_ptr->integrated_turn_position *= 360.0;
+    if(this->segway_rmp_type_ != rmp50XL) ss_ptr->integrated_turn_position *= 360.0;
     ss_ptr->touched = true;
     break;
   case 0x0405:
