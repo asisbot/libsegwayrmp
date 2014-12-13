@@ -885,13 +885,12 @@ bool SegwayRMP::ParsePacket_(Packet &packet, SegwayStatus::Ptr &ss_ptr)
     ss_ptr->integrated_forward_position =
       getInt(packet.data[0], packet.data[1], packet.data[2], packet.data[3])
     / this->meters_to_counts_;
-    // std::cout << "Forw counts " << getInt(packet.data[0], packet.data[1], packet.data[2], packet.data[3]) << " meters " << ss_ptr->integrated_forward_position << "\n";
+
     ss_ptr->integrated_turn_position    =
       getInt(packet.data[4], packet.data[5], packet.data[6], packet.data[7])
     / this->rev_to_counts_;
-    // std::cout << "Turn wheel counts " << getInt(packet.data[4], packet.data[5], packet.data[6], packet.data[7]) << " revs " << ss_ptr->integrated_turn_position << "\n";
+
     // convert from revolutions to degrees
-    // if(this->segway_rmp_type_ != rmp50XL) ss_ptr->integrated_turn_position *= 360.0;
     ss_ptr->integrated_turn_position *= 360.0;
     ss_ptr->touched = true;
     break;
