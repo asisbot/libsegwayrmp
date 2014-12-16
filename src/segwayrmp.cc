@@ -808,10 +808,10 @@ void SegwayRMP::SetConstantsBySegwayType_(SegwayRMPType &rmp_type) {
     this->torque_to_counts_ = 1463.0;
   } else 
   if(rmp_type == rmp50XL) {
-    this->dps_to_counts_ = 179.29;
+    this->dps_to_counts_ = 6.5;
     this->mps_to_counts_ = 332.0;
     this->meters_to_counts_ = 34220.0;
-    this->rev_to_counts_ = 17929.0;
+    this->rev_to_counts_ = 121666.7;
     this->torque_to_counts_ = 78.65;
   } else  {
     RMP_THROW_MSG(ConfigurationException, "Invalid Segway RMP Type");
@@ -874,20 +874,24 @@ bool SegwayRMP::ParsePacket_(Packet &packet, SegwayStatus::Ptr &ss_ptr)
     ss_ptr->integrated_left_wheel_position  =
       getInt(packet.data[0], packet.data[1], packet.data[2], packet.data[3])
     / this->meters_to_counts_;
+    
     ss_ptr->integrated_right_wheel_position =
       getInt(packet.data[4], packet.data[5], packet.data[6], packet.data[7])
     / this->meters_to_counts_;
+    
     ss_ptr->touched = true;
     break;
   case 0x0404:
     ss_ptr->integrated_forward_position =
       getInt(packet.data[0], packet.data[1], packet.data[2], packet.data[3])
     / this->meters_to_counts_;
+
     ss_ptr->integrated_turn_position    =
       getInt(packet.data[4], packet.data[5], packet.data[6], packet.data[7])
     / this->rev_to_counts_;
+
     // convert from revolutions to degrees
-    if(this->segway_rmp_type_ != rmp50XL) ss_ptr->integrated_turn_position *= 360.0;
+    ss_ptr->integrated_turn_position *= 360.0;
     ss_ptr->touched = true;
     break;
   case 0x0405:
